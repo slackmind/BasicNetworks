@@ -1,6 +1,7 @@
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -16,8 +17,11 @@ public class Server {
 
             InputStream inputStream = socket.getInputStream();
 
-            BufferedInputStream bis = new BufferedInputStream(inputStream);
-            System.out.println("Streamed byte is: " + bis .read());
+            int byteRead = inputStream.read();
+            System.out.println("Streamed byte is: " + byteRead);
+
+            OutputStream outputStream = socket.getOutputStream();
+            outputStream.write(byteRead + 1);
 
             socket.close();
 
