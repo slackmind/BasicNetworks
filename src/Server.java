@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -11,7 +12,13 @@ public class Server {
 
         for (;;) {
             Socket socket = serverSocket.accept();
-            
+
+            InputStream inputStream = socket.getInputStream();
+
+            System.out.println("Streamed byte is: " + inputStream.read());
+
+            socket.close();
+
         }
     }
 }
