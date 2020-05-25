@@ -1,7 +1,4 @@
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -16,13 +13,13 @@ public class Server {
             Socket socket = serverSocket.accept();
 
             InputStream inputStream = socket.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(inputStream);
 
-            int byteRead = inputStream.read();
-            System.out.println("Streamed byte is: " + byteRead);
+            String message = ois.readUTF();
 
-            OutputStream outputStream = socket.getOutputStream();
-            outputStream.write(byteRead + 1);
+            System.out.println(message);
 
+            ois.close();
             socket.close();
 
         }
