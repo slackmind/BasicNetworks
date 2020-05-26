@@ -10,8 +10,12 @@ public class Client {
         InputStream inputStream = socket.getInputStream();
 
         ObjectOutputStream oos = new ObjectOutputStream(outputStream);
+        ObjectInputStream ois = new ObjectInputStream(inputStream);
 
-        oos.writeUTF("Hello Server");
+        BasicClass basicClass = new BasicClass(42);
+
+        oos.writeObject(basicClass);
+        oos.flush();
 
         oos.close();
         socket.close();

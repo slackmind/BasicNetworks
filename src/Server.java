@@ -5,22 +5,24 @@ import java.net.Socket;
 
 public class Server {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         ServerSocket serverSocket = new ServerSocket(12345);
 
         for (;;) {
             Socket socket = serverSocket.accept();
-
             System.out.println("Connected to " + socket.getInetAddress());
 
-            InputStream inputStream = socket.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-            for (;;) {
-                int readByte = inputStream.read();
-                System.out.println("Read byte: " + readByte);
-                if (readByte == -1) break;
-            }
+            Object o = ois.readObject();
+
+            System.out.println("Received from client: " + o);
+
+            oos.close();
+            socket.close();
+
             /*
             ObjectInputStream ois = new ObjectInputStream(inputStream);
 
