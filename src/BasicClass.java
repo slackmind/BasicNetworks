@@ -10,7 +10,11 @@ public class BasicClass implements Serializable {
 
     @Override
     public String toString() {
-        return "The number is: " + num;
+        return "The number is:  " + num;
+    }
+
+    public int getNum(){
+        return num;
     }
 
 }

@@ -11,12 +11,12 @@ public class Client {
 
         ObjectOutputStream oos = new ObjectOutputStream(outputStream);
         ObjectInputStream ois = new ObjectInputStream(inputStream);
-
         BasicClass basicClass = new BasicClass(42);
 
         oos.writeObject(basicClass);
         oos.flush();
 
+        ois.close();
         oos.close();
         socket.close();
 

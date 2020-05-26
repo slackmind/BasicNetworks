@@ -16,9 +16,10 @@ public class Server {
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-            Object o = ois.readObject();
+            BasicClass bc =  (BasicClass) ois.readObject();
 
-            System.out.println("Received from client: " + o);
+            System.out.println("bc.getNum() returns: " + bc.getNum());
+            System.out.println("Received from client: " + bc);
 
             oos.close();
             socket.close();
