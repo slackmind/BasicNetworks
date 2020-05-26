@@ -12,7 +12,16 @@ public class Server {
         for (;;) {
             Socket socket = serverSocket.accept();
 
+            System.out.println("Connected to " + socket.getInetAddress());
+
             InputStream inputStream = socket.getInputStream();
+
+            for (;;) {
+                int readByte = inputStream.read();
+                System.out.println("Read byte: " + readByte);
+                if (readByte == -1) break;
+            }
+            /*
             ObjectInputStream ois = new ObjectInputStream(inputStream);
 
             String message = ois.readUTF();
@@ -21,7 +30,7 @@ public class Server {
 
             ois.close();
             socket.close();
-
+            */
         }
     }
 }
